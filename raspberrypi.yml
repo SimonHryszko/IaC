@@ -1,0 +1,14 @@
+---
+- name: IaC for Raspberry Pi
+  hosts: all
+  vars: 
+    MAIN_USERNAME: simon
+  become: true
+  tasks:
+    - name: Set up new user
+      ansible.builtin.import_tasks:
+        file: tasks/common/set_up_main_account.yml
+
+    - name: Set up zsh
+      ansible.builtin.import_tasks:
+        file: tasks/common/set_up_zsh.yml

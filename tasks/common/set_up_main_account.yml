@@ -1,0 +1,23 @@
+---
+- name: "Add new sudo user {{ MAIN_USERNAME }}"
+  ansible.builtin.user:
+    name: "{{ MAIN_USERNAME }}"
+    state: present
+    groups: sudo,adm,systemd-journal
+    append: true
+
+- name: "Add new sudo user {{ MAIN_USERNAME }} to sudoers"
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    line: "{{ MAIN_USERNAME }} ALL=(ALL) NOPASSWD:ALL"
+    state: present
+    validate: 'visudo -cf %s'
+
+- name: Copy public ssh key for {{ MAIN_USERNAME }}
+  ansible.builtin.copy:
+    src: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    dest: "/home/{{ MAIN_USERNAME }}/.ssh/authorized_keys"
+    owner: "{{ MAIN_USERNAME }}"
+    group: "{{ MAIN_USERNAME }}"
+    mode: 0600
+    when: lookup('file', '~/.ssh/id_rsa.pub') is not none
