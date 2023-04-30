@@ -21,3 +21,11 @@
     group: "{{ MAIN_USERNAME }}"
     mode: 0600
     when: lookup('file', '~/.ssh/id_rsa.pub') is not none
+
+- name: Disable password login
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PasswordAuthentication'
+    line: 'PasswordAuthentication no'
+    state: present
+    validate: 'sshd -t -f %s'
