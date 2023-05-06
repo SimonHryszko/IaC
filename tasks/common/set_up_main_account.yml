@@ -32,6 +32,7 @@
         group: "{{ MAIN_USERNAME }}"
         mode: 0600
         when: lookup('file', '~/.ssh/authorized_keys') is not none
+        remote_src: yes
 
 - name: Disable password login
   ansible.builtin.lineinfile:
