@@ -15,19 +15,19 @@
 
 - name: Copy authorized_keys
   block:
-    - name: Create .ssh directory
-      ansible.builtin.file:
-        path: "/home/{{ MAIN_USERNAME }}/.ssh"
-        state: directory
-        owner: "{{ MAIN_USERNAME }}"
-        group: "{{ MAIN_USERNAME }}"
-        mode: 0700
+  - name: Create .ssh directory
+    ansible.builtin.file:
+      path: "/home/{{ MAIN_USERNAME }}/.ssh"
+      state: directory
+      owner: "{{ MAIN_USERNAME }}"
+      group: "{{ MAIN_USERNAME }}"
+      mode: 0700
 
-    - name: Copy authorized_keys
-      ansible.posix.authorized_key:
-        user: {{ MAIN_USERNAME }}
-        state: present
-        key: "{{ lookup('file', '~/.ssh/authorized_keys') }}"
+  - name: Copy authorized_keys
+    ansible.posix.authorized_key:
+      user: {{ MAIN_USERNAME }}
+      state: present
+      key: "{{ lookup('file', '~/.ssh/authorized_keys') }}"
 
 - name: Disable password login
   ansible.builtin.lineinfile:
