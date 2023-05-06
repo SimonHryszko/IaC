@@ -24,14 +24,10 @@
         mode: 0700
 
     - name: Copy authorized_keys
-      ansible.builtin.copy:
-        src: "{{ lookup('file', '~/.ssh/authorized_keys') }}"
-        dest: "/home/{{ MAIN_USERNAME }}/.ssh/authorized_keys"
-        owner: "{{ MAIN_USERNAME }}"
-        group: "{{ MAIN_USERNAME }}"
-        mode: 0600
-        remote_src: yes
-        when: lookup('file', '~/.ssh/authorized_keys') is not none
+      ansible.posix.authorized_key:
+        user: {{ MAIN_USERNAME }}
+        state: present
+        key: "{{ lookup('file', '~/.ssh/authorized_keys') }}"
 
 - name: Disable password login
   ansible.builtin.lineinfile:
