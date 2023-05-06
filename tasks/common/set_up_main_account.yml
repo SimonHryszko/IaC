@@ -13,14 +13,14 @@
     state: present
     validate: 'visudo -cf %s'
 
-- name: Copy public ssh key for {{ MAIN_USERNAME }}
+- name: Copy authorized_keys
   ansible.builtin.copy:
-    src: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    src: "{{ lookup('file', '~/.ssh/authorized_keys') }}"
     dest: "/home/{{ MAIN_USERNAME }}/.ssh/authorized_keys"
     owner: "{{ MAIN_USERNAME }}"
     group: "{{ MAIN_USERNAME }}"
     mode: 0600
-    when: lookup('file', '~/.ssh/id_rsa.pub') is not none
+    when: lookup('file', '~/.ssh/authorized_keys') is not none
 
 - name: Disable password login
   ansible.builtin.lineinfile:
