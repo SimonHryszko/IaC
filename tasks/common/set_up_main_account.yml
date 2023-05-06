@@ -22,6 +22,7 @@
         owner: "{{ MAIN_USERNAME }}"
         group: "{{ MAIN_USERNAME }}"
         mode: 0700
+        remote_src: yes
 
     - name: Copy authorized_keys
       ansible.builtin.copy:
