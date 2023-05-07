@@ -36,3 +36,9 @@
     line: 'PasswordAuthentication no'
     state: present
     validate: 'sshd -t -f %s'
+
+- name: Remove current user from system
+  ansible.builtin.user:
+    name: "$USER"
+    state: absent
+    remove: true
