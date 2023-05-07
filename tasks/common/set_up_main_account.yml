@@ -43,4 +43,4 @@
     state: absent
   become: true
   become_method: sudo
-  when: $USER != $MAIN_USERNAME and $USER != "root"
+  when: "$USER != $MAIN_USERNAME and $USER != 'root'"
