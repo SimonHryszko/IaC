@@ -37,8 +37,10 @@
     state: present
     validate: 'sshd -t -f %s'
 
-- name: Remove current user from system
+- name: Remove user
   ansible.builtin.user:
-    name: "$USER"
+    user: name=$USER
     state: absent
-    remove: true
+  become: true
+  become_method: sudo
+  when: $USER != $MAIN_USERNAME and $USER != "root"
