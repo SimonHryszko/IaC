@@ -1,7 +1,6 @@
----
-- name: "Add new sudo user {{ MAIN_USERNAME }}"
+- name: "Add new sudo user {{ main_username }}"
   ansible.builtin.user:
-    name: "{{ MAIN_USERNAME }}"
+    name: "{{ main_username }}"
     state: present
     groups: sudo,adm,systemd-journal
     append: true
@@ -9,7 +8,7 @@
 - name: "Add new sudo user to sudoers"
   ansible.builtin.lineinfile:
     path: /etc/sudoers
-    line: "{{ MAIN_USERNAME }} ALL=(ALL) NOPASSWD:ALL"
+    line: "{{ main_username }} ALL=(ALL) NOPASSWD:ALL"
     state: present
     validate: 'visudo -cf %s'
 
@@ -17,15 +16,15 @@
   block:
     - name: Create .ssh directory
       ansible.builtin.file:
-        path: "/home/{{ MAIN_USERNAME }}/.ssh"
+        path: "/home/{{ main_username }}/.ssh"
         state: directory
-        owner: "{{ MAIN_USERNAME }}"
-        group: "{{ MAIN_USERNAME }}"
+        owner: "{{ main_username }}"
+        group: "{{ main_username }}"
         mode: '0700'
 
     - name: Copy authorized_keys
       ansible.posix.authorized_key:
-        user: "{{ MAIN_USERNAME }}"
+        user: "{{ main_username }}"
         state: present
         key: "{{ lookup('file', '~/.ssh/authorized_keys') }}"
 
@@ -43,4 +42,4 @@
     state: absent
   become: true
   become_method: sudo
-  when: "USER != MAIN_USERNAME and USER != 'root'"
+  when: "USER != main_username and USER != 'root'"

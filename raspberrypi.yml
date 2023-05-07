@@ -1,8 +1,8 @@
 ---
 - name: IaC for Raspberry Pi
   hosts: all
-  vars: 
-    MAIN_USERNAME: simon
+  vars:
+    main_username: simon
   become: true
   tasks:
     - name: Set up new user
