@@ -4,8 +4,8 @@
       ansible.builtin.file:
         path: /opt/{{ item }}
         state: directory
-        owner: {{ main_username }}
-        group: {{ main_username }}
+        owner: "{{ main_username }}"
+        group: "{{ main_username }}"
         mode: '0755'
 
     - name: copy Docker Compose files
