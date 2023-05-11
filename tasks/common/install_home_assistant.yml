@@ -21,4 +21,4 @@
         - docker-compose.prod.yml
   tags: homeAssistant
   loop:
-  - homeAssistant
+    - homeAssistant
