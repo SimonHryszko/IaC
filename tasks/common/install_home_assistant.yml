@@ -1,4 +1,4 @@
-- name: Go through all the files in assets/docker_composes/*
+- name: Go through all the files in assets/docker_composes
   block:
     - name: Make sure directory exists
       ansible.builtin.file:
