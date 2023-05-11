@@ -16,3 +16,7 @@
     - name: Install packages
       ansible.builtin.import_tasks:
         file: tasks/common/install_packages.yml
+
+    - name: Install home assistant
+      ansible.builtin.import_tasks:
+        file: tasks/common/install_home_assistant.yml
