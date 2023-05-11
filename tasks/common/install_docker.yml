@@ -1,11 +1,9 @@
 - name: Install apt-transport-https
   ansible.builtin.apt:
     name:
-      - apt-transport-https
-      - ca-certificates
-      - lsb-release
-      - gnupg
-    state: latest
+      - apt-transport-https=2.2.4
+      - ca-certificates=20210119
+      - lsb-release=11.1.0
     update_cache: true
 
 - name: Add signing key
@@ -22,9 +20,8 @@
 - name: Install Docker
   ansible.builtin.apt:
     name:
-      - docker
-      - docker.io
-      - docker-compose
-      - docker-registry
-    state: latest
+      - docker=1.5-2
+      - docker.io=7.4.1-1
+      - docker-compose=1.25.0-1
+      - docker-registry=2.7.1+ds2-7+b6
     update_cache: true
