@@ -17,6 +17,7 @@
       ansible.builtin.import_tasks:
         file: tasks/common/install_packages.yml
 
-    - name: Install home assistant
+    - name: Install docker compose applications
       ansible.builtin.import_tasks:
-        file: tasks/common/install_home_assistant.yml
+        file: tasks/common/install_docker_apps.yml
+        tags: docker-apps

@@ -19,6 +19,5 @@
         files:
           - docker-compose.yml
           - docker-compose.prod.yml
-  tags: homeAssistant
   loop:
     - homeAssistant
