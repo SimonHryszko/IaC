@@ -17,8 +17,8 @@
       community.docker.docker_compose:
         project_src: /opt/{{ item }}
         files:
-        - docker-compose.yml
-        - docker-compose.prod.yml
+          - docker-compose.yml
+          - docker-compose.prod.yml
   tags: homeAssistant
   loop:
     - homeAssistant
