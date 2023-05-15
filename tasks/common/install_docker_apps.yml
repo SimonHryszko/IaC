@@ -7,17 +7,23 @@
         owner: "{{ main_username }}"
         group: "{{ main_username }}"
         mode: '0755'
+      with_items:
+        - "{{ files }}"
 
-    - name: copy Docker Compose files
-      copy:
+    - name: Copy Docker Compose files
+      ansible.builtin.copy:
         src: assets/docker_composes/{{ item }}
-        dest: opt/{{ item }}/docker-compose.yml
-
+        dest: /opt/{{ item }}/docker-compose.yml
+        owner: "{{ main_username }}"
+        group: "{{ main_username }}"
+        mode: '0644'
+      with_items:
+        - "{{ files }}"
+        
     - name: deploy Docker Compose stack
       community.docker.docker_compose:
         project_src: /opt/{{ item }}
         files:
-          - docker-compose.yml
-          - docker-compose.prod.yml
-  loop:
-    - homeAssistant
+        - docker-compose.yml
+      with_items:
+        - "{{ files }}"
