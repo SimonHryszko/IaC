@@ -26,3 +26,10 @@
       - docker-compose=1.25.0-1
       - docker-registry=2.7.1+ds2-7+deb11u1
     update_cache: true
+
+- name: Add user to docker group
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
+    state: present
