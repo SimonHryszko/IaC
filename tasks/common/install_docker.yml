@@ -4,7 +4,7 @@
       - apt-transport-https=2.2.4
       - ca-certificates=20210119
       - lsb-release=11.1.0
-      - gnupg=2.2.27-2
+      - gnupg=2.2.27-2+deb11u2
     update_cache: true
 
 - name: Add signing key
