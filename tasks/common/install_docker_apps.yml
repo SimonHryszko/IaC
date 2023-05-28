@@ -21,6 +21,13 @@
       with_items:
         - "{{ files }}"
 
+    - name: Stop all services
+      community.docker.docker_compose:
+        project_src: flask
+        build: false
+        stopped: true
+      register: output
+
     - name: Deploy Docker Compose stack
       community.docker.docker_compose:
         project_src: /opt/{{ item }}
