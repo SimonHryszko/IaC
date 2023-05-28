@@ -28,7 +28,6 @@
         chdir: /opt/{{ item }}
       with_items:
         - "{{ files }}"
-      when: output.changed
 
     - name: Run Docker Compose
       ansible.builtin.command: docker-compose up -d
