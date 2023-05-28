@@ -20,7 +20,13 @@
         force: true
       with_items:
         - "{{ files }}"
-      register: output
+
+    - name: Stop containers
+      ansible.builtin.command: docker-compose stop
+      args:
+        chdir: /opt/{{ item }}
+      with_items:
+        - "{{ files }}"
 
     - name: Remove containers
       ansible.builtin.command: docker-compose rm -f
