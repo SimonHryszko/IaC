@@ -19,6 +19,7 @@
         mode: '0644'
       with_items:
         - "{{ files }}"
+
     - name: Deploy Docker Compose stack
       community.docker.docker_compose:
         project_src: /opt/{{ item }}
