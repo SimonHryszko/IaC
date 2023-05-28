@@ -1,4 +1,4 @@
 - name: Install docker
   ansible.builtin.import_tasks:
     file: tasks/common/install_docker.yml
-    tags: docker
+  tags: docker
