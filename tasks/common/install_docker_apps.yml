@@ -17,6 +17,7 @@
         owner: "{{ main_username }}"
         group: "{{ main_username }}"
         mode: '0644'
+        force: true
       with_items:
         - "{{ files }}"
 
