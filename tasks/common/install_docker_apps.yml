@@ -22,14 +22,6 @@
         - "{{ files }}"
       register: output
 
-    - name: Stop Docker Compose
-      ansible.builtin.command: docker-compose stop
-      args:
-        chdir: /opt/{{ item }}
-      with_items:
-        - "{{ files }}"
-      when: output.changed
-
     - name: Run Docker Compose
       ansible.builtin.command: docker-compose up -d
       args:
