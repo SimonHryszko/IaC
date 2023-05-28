@@ -21,19 +21,25 @@
       with_items:
         - "{{ files }}"
 
-    - name: Stop containers
-      ansible.builtin.command: docker-compose stop
-      args:
-        chdir: /opt/{{ item }}
+    - name: Stop all services
+      community.docker.docker_compose:
+        project_src: /opt/{{ item }}
+        build: false
+        stopped: true
+      register: output
       with_items:
         - "{{ files }}"
 
-    - name: Remove containers
-      ansible.builtin.command: docker-compose rm -f
-      args:
-        chdir: /opt/{{ item }}
-      with_items:
-        - "{{ files }}"
+    - name: Get running containers
+      docker_host_info:
+        containers: yes
+      register: docker_info
+
+    - name: Stop running containers
+      docker_container:
+        name: "{{ item }}"
+        state: stopped
+      loop: "{{ docker_info.containers | map(attribute='Id') | list }}"
 
     - name: Run Docker Compose
       ansible.builtin.command: docker-compose up -d
