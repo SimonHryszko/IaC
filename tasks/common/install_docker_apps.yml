@@ -23,10 +23,13 @@
 
     - name: Stop all services
       community.docker.docker_compose:
-        project_src: /opt
+        project_src: /opt/{{ item }}
         build: false
         stopped: true
       register: output
+      with_items:
+        - "{{ files }}"
+      when: output.changed
 
     - name: Deploy Docker Compose stack
       community.docker.docker_compose:
