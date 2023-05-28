@@ -23,4 +23,5 @@
       vars:
         files:
           - homeAssistant
+          - octoprint
       tags: docker-compose
