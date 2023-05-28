@@ -22,20 +22,17 @@
         - "{{ files }}"
       register: output
 
-    - name: Stop all services
-      community.docker.docker_compose:
-        project_src: /opt/{{ item }}
-        build: false
-        stopped: true
-      register: output
+    - name: Stop Docker Compose
+      ansible.builtin.command: docker-compose stop
+      args:
+        chdir: /opt/{{ item }}
       with_items:
         - "{{ files }}"
       when: output.changed
 
-    - name: Deploy Docker Compose stack
-      community.docker.docker_compose:
-        project_src: /opt/{{ item }}
-        files:
-          - docker-compose.yml
+    - name: Run Docker Compose
+      ansible.builtin.command: docker-compose up -d
+      args:
+        chdir: /opt/{{ item }}
       with_items:
         - "{{ files }}"
