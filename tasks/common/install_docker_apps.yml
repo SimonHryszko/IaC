@@ -22,6 +22,14 @@
         - "{{ files }}"
       register: output
 
+    - name: Remove containers
+      ansible.builtin.command: docker-compose down
+      args:
+        chdir: /opt/{{ item }}
+      with_items:
+        - "{{ files }}"
+      when: output.changed
+
     - name: Run Docker Compose
       ansible.builtin.command: docker-compose up -d
       args:
