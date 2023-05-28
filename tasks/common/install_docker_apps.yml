@@ -20,10 +20,10 @@
       with_items:
         - "{{ files }}"
         
-    - name: deploy Docker Compose stack
+    - name: Deploy Docker Compose stack
       community.docker.docker_compose:
         project_src: /opt/{{ item }}
         files:
-        - docker-compose.yml
+          - docker-compose.yml
       with_items:
         - "{{ files }}"
