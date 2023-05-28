@@ -31,5 +31,5 @@
   ansible.builtin.user:
     name: "{{ main_username }}"
     groups: docker
-    append: yes
+    append: true
     state: present
