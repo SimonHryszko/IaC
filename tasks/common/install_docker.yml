@@ -22,7 +22,7 @@
   ansible.builtin.apt:
     name:
       - docker=1.5-2
-      - docker.io=7.4.1-1
+      - docker.io=20.10.2+ds1-2
       - docker-compose=1.25.0-1
       - docker-registry=2.7.1+ds2-7+b6
     update_cache: true
