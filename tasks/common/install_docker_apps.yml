@@ -23,7 +23,7 @@
       register: output
 
     - name: Remove containers
-      ansible.builtin.command: docker-compose down
+      ansible.builtin.command: docker-compose rm -f
       args:
         chdir: /opt/{{ item }}
       with_items:
