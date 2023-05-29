@@ -12,4 +12,4 @@ services:
     #  - /dev/ttyACM0:/dev/ttyACM0
     #  - /dev/video0:/dev/video0
     volumes:
-     - ./config:/octoprint
+     - ./octoprint:/octoprint
