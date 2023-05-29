@@ -5,7 +5,7 @@ services:
     image: octoprint/octoprint
     restart: unless-stopped
     ports:
-      - 8443:8443
+      - 8080:8443
     devices:
     # use `python -m serial.tools.miniterm` to see what the name is of the printer, this requires pyserial
     - /dev/ttyAMA0:/dev/ttyAMA0
