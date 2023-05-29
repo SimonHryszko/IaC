@@ -20,11 +20,3 @@
         force: true
       with_items:
         - "{{ files }}"
-
-    - name: Restart services
-      community.docker.docker_compose:
-        project_src: /opt/{{ item }}
-        build: false
-        restarted: true
-      with_items:
-        - "{{ files }}"
