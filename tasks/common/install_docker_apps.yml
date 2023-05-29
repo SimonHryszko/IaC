@@ -21,29 +21,8 @@
       with_items:
         - "{{ files }}"
 
-    - name: Stop all services
+    - name: Restart services
       community.docker.docker_compose:
         project_src: /opt/{{ item }}
         build: false
-        stopped: true
-      register: output
-      with_items:
-        - "{{ files }}"
-
-    - name: Get running containers
-      docker_host_info:
-        containers: yes
-      register: docker_info
-
-    - name: Stop running containers
-      docker_container:
-        name: "{{ item }}"
-        state: stopped
-      loop: "{{ docker_info.containers | map(attribute='Id') | list }}"
-
-    - name: Run Docker Compose
-      ansible.builtin.command: docker-compose up -d
-      args:
-        chdir: /opt/{{ item }}
-      with_items:
-        - "{{ files }}"
+        restarted: true
