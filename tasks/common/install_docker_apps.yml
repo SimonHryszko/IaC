@@ -12,7 +12,7 @@
 
     - name: Copy Docker Compose files
       ansible.builtin.copy:
-        src: assets/docker_composes/{{ item }}
+        src: assets/docker_composes/{{ item }}.yml
         dest: /opt/{{ item }}/docker-compose.yml
         owner: "{{ main_username }}"
         group: "{{ main_username }}"
