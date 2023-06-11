@@ -25,4 +25,5 @@
           - homeAssistant
           - octoprint
           - jackett
+          - libcups
       tags: docker-compose

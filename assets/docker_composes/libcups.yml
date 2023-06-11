@@ -1,0 +1,8 @@
+version: '2.4'
+
+services:
+  octoprint:
+    image: ticosax/cups-in-docker
+    restart: unless-stopped
+    ports:
+      - 631:631
