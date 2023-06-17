@@ -1,8 +1,16 @@
-version: '2.4'
-
+version: "3"
 services:
-  octoprint:
-    image: ticosax/cups-in-docker
-    restart: unless-stopped
-    ports:
-      - 631:631
+    cups:
+        image: anujdatar/cups
+        container_name: cups
+        restart: unless-stopped
+        ports:
+            - "631:631"
+        devices:
+            - /dev/bus/usb:/dev/bus/usb
+        environment:
+            - CUPSADMIN=${CUPSADMIN}
+            - CUPSPASSWORD=${CUPSPASSWORD}
+            - TZ="Europe/Amsterdam"
+        volumes:
+            - ./config:/etc/cups
