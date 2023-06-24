@@ -3,9 +3,7 @@ raspi ansible_host=raspberrypi.local ansible_user=simon
 
 [server]
 dell ansible_host=192.168.0.20 ansible_user=simon
+frog ansible_host=frog01.mikr.us ansible_user=fron ansible_port=10434
 
 [laptop]
 precision ansible_host=localhost ansible_user=simon ansible_connection=local ansible_python_interpreter=/usr/bin/python3
-
-[frog]
-frog ansible_host=frog01.mikr.us ansible_user=fron ansible_port=10434
