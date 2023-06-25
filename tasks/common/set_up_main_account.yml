@@ -27,7 +27,7 @@
         user: "{{ main_username }}"
         state: present
         key: "{{ lookup('file', '~/.ssh/authorized_keys') }}"
-      ignore_errors: true
+      ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Disable password login
   ansible.builtin.lineinfile:
