@@ -1,0 +1,11 @@
+- name: Copy service file
+  ansible.builtin.copy:
+    src: assets/services/console-blanking.service
+    dest: /etc/systemd/system/console-blanking.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Reload systemd
+    - Restart console-blanking
+  tags: console-blanking,console

@@ -1,0 +1,10 @@
+---
+- name: IaC for Laptop 'PRECISION'
+  hosts: server
+  vars:
+    main_username: simon
+  become: true
+  tasks:
+    - name: Set up new server screen blanking
+      ansible.builtin.import_tasks:
+        file: tasks/server/enable_console_blanking.yml
