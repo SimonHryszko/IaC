@@ -4,6 +4,7 @@ raspi ansible_host=raspberrypi.local ansible_user=simon
 [server]
 dell ansible_host=192.168.0.20 ansible_user=simon
 frog ansible_host=frog01.mikr.us ansible_user=frog ansible_port=10434 ansible_python_interpreter=/usr/bin/python3
+mikrus ansible_host=maluch.mikr.us ansible_user=root ansible_port=10493
 
 [laptop]
 precision ansible_host=localhost ansible_user=simon ansible_connection=local ansible_python_interpreter=/usr/bin/python3
