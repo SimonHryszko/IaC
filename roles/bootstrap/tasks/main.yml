@@ -1,0 +1,48 @@
+- name: Create new 'Groovy' user
+  tags: bootstrap,bootstrap-user
+  ansible.builtin.user:
+    name: groovy
+    state: present
+
+- name: Determine available groups
+  tags: bootstrap,bootstrap-group
+  getent:
+    database: group
+
+- name: "Set 'Groovy' groups if exists"
+  tags: bootstrap,bootstrap-group
+  user:
+    name: groovy
+    append: yes
+    groups: "{{ item }}"
+  loop:
+    - sudo
+    - wheel
+    - adm
+    - systemd-journal
+    - sys
+  when: item in ansible_facts.getent_group
+
+- name: Add public keys to 'Groovy' user
+  tags: bootstrap,bootstrap-ssh
+  authorized_key:
+    user: groovy
+    state: present
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEyrzghrGiTsmAa68bo8OPUfSkgtmJRk0v8iyVgK5AvD ansible"
+
+- name: "Copy sudoers file"
+  tags: bootstrap,bootstrap-sudo
+  copy:
+    src: sudoers
+    dest: /etc/sudoers
+    owner: root
+    group: root
+    mode: 0440
+
+- name: Set sudoers permission for new user
+  tags: bootstrap,bootstrap-sudo
+  community.general.sudoers:
+    name: groovy
+    commands: ALL
+    user: groovy
+    runas: groovy

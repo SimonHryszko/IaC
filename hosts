@@ -1,10 +1,11 @@
 [all]
-raspi ansible_host=raspberrypi.local ansible_user=simon
+raspi ansible_host=192.168.0.251
 
 [server]
-dell ansible_host=192.168.0.20 ansible_user=simon
-frog ansible_host=frog01.mikr.us ansible_user=frog ansible_port=10434 ansible_python_interpreter=/usr/bin/python3
-mikrus ansible_host=maluch.mikr.us ansible_user=root ansible_port=10493
+dell ansible_host=192.168.0.20
+frog ansible_host=frog01.mikr.us ansible_port=10434 ansible_python_interpreter=/usr/bin/python3 ansible_user=frog ansible_ssh_private_key_file=~/.ssh/id_rsa
+mikrus ansible_host=maluch.mikr.us ansible_port=10493 ansible_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
+hetzner ansible_host=65.109.8.97 ansible_user=root
 
 [laptop]
-precision ansible_host=localhost ansible_user=simon ansible_connection=local ansible_python_interpreter=/usr/bin/python3
+precision ansible_host=192.168.0.132 ansible_connection=local ansible_python_interpreter=/usr/bin/python3 ansible_user=groovy
